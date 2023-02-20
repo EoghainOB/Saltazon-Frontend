@@ -1,38 +1,119 @@
-#root {
-    text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
+  background-color: rgb(228, 228, 228);
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.top_header {
-    top: 0;
-    display: flex;
-    border-style: solid;
-    border-color: #242424;
-    width: 98%;
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+input,
+label,
+button {
+  font-family: "Roboto Slab", serif;
 }
 
-.navbar {
-
+.formContainer {
+  background-color: white;
+  width: 250px;
+  padding: 20px;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.69);
 }
 
-.product_list {
-    margin: auto;
+.formContainer input {
+  width: 100%;
+  margin-bottom: 10px;
+  height: 25px;
+  border: 1px solid rgb(222, 222, 222);
+  padding-left: 5px;
+}
+
+.formContainer h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.errMsg {
+  text-align: center;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 5px;
+}
+
+label {
+  font-size: medium;
+  align-items: flex-start;
 }
 
 .login_info {
-    margin: auto;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  text-align: right;
+  padding: 10px;
 }
 
-.categorySorter{
-    height: 50px;
-    margin: auto;
-    border-style: solid;
-    border-color: #242424;
+ul {
+  list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
 
+.product_list {
+  background-color: azure;
+}
+
+#uidnote,
+#pwdnote,
+#confirmnote {
+  color: rgb(67, 67, 67);
+  font-size: 0.8em;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}

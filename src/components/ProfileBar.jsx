@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import AuthContext from "../context/authProvider";
+
 function ProfileBar() {
-    return (
-        <>
-            <div className={"login_info"}>
-                <h1>Logged in as User</h1>
-            </div>
-        </>
-    )
+  const { auth } = useContext(AuthContext);
+  return (
+    <>
+      <div className={"login_info"}>
+        {auth.username && <h4>Logged in as {auth?.username}</h4>}
+      </div>
+    </>
+  );
 }
 
 export default ProfileBar;
