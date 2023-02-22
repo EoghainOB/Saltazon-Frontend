@@ -1,46 +1,53 @@
-import Product from "./Product.jsx";
-import "../../App.css";
-import CategorySorter from "./CategorySorter.jsx";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/authProvider";
+import Product from "../products/Product";
+import ReactPaginate from "react-paginate";
 
-const sorted = false;
+function ProductList() {
+  const { products, tags } = useContext(AuthContext);
 
-function sortByCategory(products) {
-  console.log(products);
-  return products.sort(compareProductCategory);
-}
+  const [itemOffset, setItemOffset] = useState(0);
+  const [itemsPerPage] = useState(12);
 
-function compareProductCategory(a, b) {
-  if (a.category < b.category) {
-    return -1;
-  }
-  if (a.category > b.category) {
-    return 1;
-  }
-  return 0;
-}
+  const endOffset = itemOffset + itemsPerPage;
+  const pageCount = Math.ceil(products.length / itemsPerPage);
 
-function sortSomething(category) {
-  console.log("sorting things would be cool" + category);
-}
+  const handlePageClick = (e) => {
+    const newOffset = (e.selected * itemsPerPage) % products.length;
+    setItemOffset(newOffset);
+  };
 
-function ProductList({ products, addToCart }) {
-  let sortedProducts;
-  if (sorted) {
-    sortedProducts = sortByCategory(products);
-  } else {
-    sortedProducts = products;
-  }
   return (
     <>
-      <CategorySorter
-        categories={["First Category", "Second Category"]}
-        sorterFunction={sortSomething}
-      />
-      <section className={"product_list"}>
-        {sortedProducts.map((p) => {
-          return <Product key={p.id} product={p} addToCart={addToCart} />;
-        })}
-      </section>
+      <h1>Products</h1>
+      <div className="products">
+        {/* <Filter setFilter={setFilter} /> */}
+        <>
+          {products.slice(itemOffset, endOffset).map((product, index) => {
+            return (
+              <div key={index}>
+                <Link to={`/product/${product.id}`}>
+                  <Product product={product} tag={tags} />
+                </Link>
+              </div>
+            );
+          })}
+
+          {pageCount > 1 && (
+            <div className="paging">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={2}
+                pageCount={Math.ceil(pageCount)}
+                previousLabel="< Previous"
+              />
+            </div>
+          )}
+        </>
+      </div>
     </>
   );
 }

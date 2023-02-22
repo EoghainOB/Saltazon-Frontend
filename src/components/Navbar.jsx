@@ -6,28 +6,36 @@ function NavBar() {
   const { auth } = useContext(AuthContext);
 
   return (
-    <nav className={"navbar"}>
+    <nav className="navbar">
       <ul>
-        <li>
-          <Link to={"/"} className={"nav_button"}>
-            All Products
-          </Link>
-        </li>
-        <li>
-          <Link to={"/login"} className={"nav_button"}>
-            Login
-          </Link>
-        </li>
-        <li>
-          <Link to={"/create-new-user"} className={"nav_button"}>
-            Create new user
-          </Link>
-        </li>
-        <li>
-          <Link to={"/cart"} className={"nav_button"}>
-            Go to cart
-          </Link>
-        </li>
+        {!auth.username && (
+          <li>
+            <Link to={"/login"} className={"nav_button"}>
+              Login
+            </Link>
+          </li>
+        )}
+        {!auth.username && (
+          <li>
+            <Link to={"/create-new-user"} className={"nav_button"}>
+              Create new user
+            </Link>
+          </li>
+        )}
+        {auth.username && (
+          <li>
+            <Link to={"/"} className={"nav_button"}>
+              All Products
+            </Link>
+          </li>
+        )}
+        {auth.username && (
+          <li>
+            <Link to={"/cart"} className={"nav_button"}>
+              Go to cart
+            </Link>
+          </li>
+        )}
         {auth.role === "super-admin" ||
           (auth.role === "admin" && (
             <li>

@@ -7,7 +7,6 @@
 }
 
 .App {
-  background-color: rgb(228, 228, 228);
   display: flex;
   flex-direction: column;
   max-width: 1200px;
@@ -24,6 +23,16 @@ input,
 label,
 button {
   font-family: "Roboto Slab", serif;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: large;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: medium;
 }
 
 .formContainer {
@@ -79,6 +88,15 @@ label {
 
 ul {
   list-style: none;
+  overflow-x: hidden;
+  white-space: nowrap;
+  height: 2em;
+  width: 100%;
+}
+
+li {
+  display: inline;
+  margin-right: 10px;
 }
 
 a {
@@ -116,4 +134,89 @@ a {
 .invalid {
   color: red;
   margin-left: 0.25rem;
+}
+
+.header {
+  height: 100px;
+}
+
+.products {
+  max-width: 1250px;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 20px;
+}
+
+.productpage_item {
+  display: flex;
+  background: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.product_item {
+  max-width: 380px;
+  background: #fff;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.product_item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.productpage_item img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.productpage_list_txt,
+.product_list_txt {
+  padding: 10px;
+}
+
+.productpage_info {
+  width: 60%;
+}
+
+.cartbutton {
+  padding: 10px;
+}
+
+[role="navigation"] {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.paging {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.paging a {
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+.next a,
+.previous a {
+  color: rgb(0, 0, 0);
+}
+
+.selected a {
+  color: rgb(241, 100, 0);
+  font-size: x-large;
 }

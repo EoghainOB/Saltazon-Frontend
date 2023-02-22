@@ -1,4 +1,3 @@
-import "./Cart.css";
 function CartItem({ product, removeFromCart }) {
   return (
     <article className={"cart_item"}>

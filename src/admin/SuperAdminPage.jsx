@@ -1,15 +1,16 @@
 import StoreOverview from "./StoreOverview.jsx";
-import { allStores } from "../fakedata/fakeStores.js";
 import AddStoreForm from "./AddStoreForm.jsx";
+import { useContext } from "react";
+import AuthContext from "../context/authProvider";
 
 function SuperAdminPage() {
-  const currentUser = "Best Admin of all";
+  const { stores } = useContext(AuthContext);
   return (
     <>
-      <header>Welcome Almighty SuperAdmin {currentUser}</header>
+      <header>Welcome Almighty SuperAdmin</header>
       <AddStoreForm />
-      {allStores.map((s) => {
-        return <StoreOverview storeInfo={s} />;
+      {stores.map((store) => {
+        return <StoreOverview storeInfo={store} />;
       })}
     </>
   );

@@ -66,7 +66,6 @@ const LoginForm = () => {
         );
         const accessToken = await response?.data?.accessToken;
         const decoded = jwt_decode(accessToken);
-        console.log("USEEFFECT", decoded);
         setAuth(decoded);
       } catch (err) {
         console.error(error);
