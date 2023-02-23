@@ -9,8 +9,13 @@ function SuperAdminPage() {
     <>
       <header>Welcome Almighty SuperAdmin</header>
       <AddStoreForm />
-      {stores.map((store) => {
-        return <StoreOverview storeInfo={store} />;
+      {stores.map((store, index) => {
+        return (
+          <div className="storesAdminlist" key={index}>
+            <StoreOverview storeInfo={store} />
+            <hr />
+          </div>
+        );
       })}
     </>
   );

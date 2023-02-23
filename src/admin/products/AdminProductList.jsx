@@ -7,7 +7,11 @@ function AdminProductList({ products, storeName, storeId }) {
       <header>The items in {storeName}</header>
       <AddProductForm storeId={storeId} />
       {products.map((item) => {
-        return <AdminProduct key={item.id} product={item} />;
+        return (
+          <div key={item.id}>
+            <AdminProduct product={item} />;
+          </div>
+        );
       })}
     </div>
   );

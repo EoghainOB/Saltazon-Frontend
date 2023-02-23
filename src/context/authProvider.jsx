@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
 
   const [trigger, setTrigger] = useState("");
-  const [cart, setCart] = useState("");
+  const [cart, setCart] = useState();
   const [stores, setStores] = useState("");
   const [products, setProducts] = useState();
   const [tags, setTags] = useState();
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getStores();
-  }, []);
+  }, [stores]);
 
   const getTags = async () => {
     let tags = await products?.map((product) => product.category);
@@ -40,8 +40,18 @@ export const AuthProvider = ({ children }) => {
   }, [auth, products]);
 
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart") || ""));
-  }, [trigger]);
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      const parsedCart = JSON.parse(savedCart);
+      if (auth.username === parsedCart[0].owner) {
+        setCart(parsedCart);
+      } else {
+        setCart([]);
+      }
+    } else {
+      setCart([]);
+    }
+  }, [auth.username, trigger]);
 
   return (
     <AuthContext.Provider

@@ -20,7 +20,6 @@ function ProductList() {
 
   return (
     <>
-      <h1>Products</h1>
       <div className="products">
         {/* <Filter setFilter={setFilter} /> */}
         <>

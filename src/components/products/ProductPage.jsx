@@ -5,35 +5,35 @@ import AuthContext from "../../context/authProvider";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { products, setTrigger } = useContext(AuthContext);
+  const { auth, products, setTrigger, stores } = useContext(AuthContext);
 
   const filtered = products.find((product) => product.id == id);
+  const currentStore = stores.filter(
+    (store) => store.uniqueStoreId === filtered.storeId
+  );
 
   const addToCart = async (e) => {
     e.preventDefault();
     const data = {
+      owner: auth.username,
       name: filtered.title,
       id: filtered.id,
       price: filtered.price,
+      image: filtered.imageUrl,
       qty: +e.target.qty.value,
     };
-    const cart = localStorage.getItem("cart");
-    if (cart === null) {
-      localStorage.setItem("cart", JSON.stringify([data]));
+    const cart =
+      JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
+
+    const existingItemIndex = cart.findIndex((item) => item.id === data.id);
+
+    if (existingItemIndex !== -1) {
+      cart[existingItemIndex].qty += parseInt(data.qty);
     } else {
-      const getCart = localStorage.getItem("cart");
-      let currentCart = JSON.parse(getCart);
-      const existingItemIndex = currentCart.findIndex(
-        (item) => item.id === data.id
-      );
-      if (existingItemIndex !== -1) {
-        currentCart[existingItemIndex].qty += parseInt(data.qty);
-      } else {
-        currentCart.push(data);
-      }
-      localStorage.setItem("cart", JSON.stringify(currentCart));
-      setTrigger(currentCart);
+      cart.push(data);
     }
+    localStorage.setItem(`cart_${auth.username}`, JSON.stringify(cart));
+    setTrigger(cart);
   };
 
   return (
@@ -57,8 +57,14 @@ const ProductPage = () => {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
+              <br />
               <button>Add to Cart</button>
             </form>
+            <h5>
+              This item is sold by {currentStore[0].name}
+              <br />
+              In stock: {filtered.quantity}
+            </h5>
           </div>
         </div>
       </article>

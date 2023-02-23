@@ -36,18 +36,24 @@ function NavBar() {
             </Link>
           </li>
         )}
-        {auth.role === "super-admin" ||
-          (auth.role === "admin" && (
-            <li>
-              <Link to={"/admin"} className={"nav_button"}>
-                Go to admin
-              </Link>
-            </li>
-          ))}
+        {auth.role === "user" && (
+          <li>
+            <Link to={"/create-new-store"} className={"nav_button"}>
+              Create new store
+            </Link>
+          </li>
+        )}
+        {auth.role === "admin" && (
+          <li>
+            <Link to={"/admin"} className={"nav_button"}>
+              Admin
+            </Link>
+          </li>
+        )}
         {auth.role === "super-admin" && (
           <li>
             <Link to={"/admin/super"} className={"nav_button"}>
-              Go to SuperAdmin
+              SuperAdmin
             </Link>
           </li>
         )}

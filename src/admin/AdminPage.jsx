@@ -7,21 +7,27 @@ function AdminPage() {
   const [storeProducts, setStoreProducts] = useState([]);
 
   const adminStoreId = auth.storeId;
-  const currentStore = stores.find((store) => store.id === adminStoreId);
+
+  const currentStore = stores.filter(
+    (store) => store.uniqueStoreId === adminStoreId
+  );
 
   useEffect(() => {
-    const storeItems = products.filter(
-      (items) => items.storeId === adminStoreId
-    );
+    let storeItems = [];
+    if (auth.role === "super-admin") {
+      storeItems = products;
+    } else {
+      storeItems = products.filter((items) => items.storeId === adminStoreId);
+    }
     setStoreProducts(storeItems);
-  }, []);
+  }, [auth.role, products, adminStoreId]);
 
   return (
     <>
-      <header>Welcome to the {currentStore}</header>
+      <h2>Welcome to the {currentStore[0].name}</h2>
       <AdminProductList
         products={storeProducts}
-        storeName={currentStore}
+        storeName={currentStore[0].name}
         storeId={adminStoreId}
       />
     </>
