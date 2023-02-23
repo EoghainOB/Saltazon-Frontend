@@ -8,7 +8,7 @@ function Product({ product, addToCart }) {
         <section className="product_list_txt">
           <h1>{product.title}</h1>
           <h2>{product.description}</h2>
-          <h3>{product.price}</h3>
+          <h3>€ {product.price}</h3>
         </section>
       </article>
     </>

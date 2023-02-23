@@ -32,10 +32,15 @@ function AddStoreForm({}) {
   console.log();
   return (
     <>
-      <h4>Add new Store</h4>
+      <h4>
+        <b>Add new Store</b>
+      </h4>
       <form onSubmit={addNewStore} className="add_store_form">
-        <label htmlFor="name_input">Title</label>
+        <label htmlFor="name_input">Store name:</label>
         <input placeholder="Name of store" id="name_input" />
+        <br />
+        <label htmlFor="user_input">Username:</label>
+        <input placeholder="User email" id="user_input" />
         <br />
         <button>Add Store</button>
       </form>

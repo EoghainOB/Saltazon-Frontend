@@ -3,17 +3,21 @@ import { Outlet } from "react-router-dom";
 import ProfileBar from "./ProfileBar";
 import NavBar from "./Navbar";
 import Header from "./header";
+import Footer from "./footer";
 
 const Layout = () => {
   return (
-    <main className="App">
+    <>
       <header className="top_header">
         <ProfileBar />
         <Header />
-        <NavBar />
       </header>
-      <Outlet />
-    </main>
+      <main className="App">
+        <NavBar />
+        <Outlet />
+        <Footer />
+      </main>
+    </>
   );
 };
 

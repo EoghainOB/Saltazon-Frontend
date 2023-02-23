@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import AuthContext from "../../context/authProvider";
+import CartItem from "./CartItem";
 
 function Cart() {
   const { setCart, auth, products } = useContext(AuthContext);
@@ -7,7 +8,7 @@ function Cart() {
   const cart = JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
 
   if (cart.length === 0) {
-    return <h3>No items in cart, why not add some?</h3>;
+    return <div className="cartEmpty">No items in cart, why not add some?</div>;
   }
 
   const removeFromCart = async (id) => {
@@ -18,29 +19,27 @@ function Cart() {
 
   return (
     <div className="cart">
+      <div className="cartIndex">
+        <div className="cartImage"></div>
+        <div className="cartName">
+          <h2>Product</h2>
+        </div>
+        <div className="cartQty">
+          <h2>Qty</h2>
+        </div>
+        <div className="cartPrice">
+          <h2>Price</h2>
+        </div>
+        <div className="cartSubtotal">
+          <h2>Sub Total</h2>
+        </div>
+        <div className="delButton">
+          <h2>Remove</h2>
+        </div>
+      </div>
       {cart.map((item, index) => {
         return (
-          <article key={index} className="cart_item">
-            <div className="cartImage">
-              <img src={item.image} />
-            </div>
-            <div className="cartName">
-              <h2>{item.name}</h2>
-            </div>
-            <div className="cartQty">
-              <h2>Amount {item.qty}</h2>
-            </div>
-            <div className="cartPrice">
-              <h2>Price {item.price}</h2>
-            </div>
-            <button
-              id={item.id}
-              type="button"
-              onClick={() => removeFromCart(item.id)}
-            >
-              Remove from Cart
-            </button>
-          </article>
+          <CartItem item={item} index={index} removeFromCart={removeFromCart} />
         );
       })}
     </div>

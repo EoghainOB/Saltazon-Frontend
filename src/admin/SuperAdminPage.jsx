@@ -7,13 +7,16 @@ function SuperAdminPage() {
   const { stores } = useContext(AuthContext);
   return (
     <>
-      <header>Welcome Almighty SuperAdmin</header>
-      <AddStoreForm />
+      <div className="welcome">
+        <h2>Welcome Almighty SuperAdmin</h2>
+      </div>
+      <div className="addStore">
+        <AddStoreForm />
+      </div>
       {stores.map((store, index) => {
         return (
           <div className="storesAdminlist" key={index}>
             <StoreOverview storeInfo={store} />
-            <hr />
           </div>
         );
       })}

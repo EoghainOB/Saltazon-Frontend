@@ -24,7 +24,9 @@ function AdminPage() {
 
   return (
     <>
-      <h2>Welcome to the {currentStore[0].name}</h2>
+      <div className="welcome">
+        <h2>Welcome to the {currentStore[0].name}</h2>
+      </div>
       <AdminProductList
         products={storeProducts}
         storeName={currentStore[0].name}

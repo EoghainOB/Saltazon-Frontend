@@ -1,7 +1,11 @@
 import AddStoreForm from "../../admin/AddStoreForm";
 
 const NewStore = () => {
-  return <AddStoreForm />;
+  return (
+    <>
+      <AddStoreForm />
+    </>
+  );
 };
 
 export default NewStore;

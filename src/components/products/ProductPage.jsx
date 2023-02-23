@@ -46,7 +46,7 @@ const ProductPage = () => {
           <section className="productpage_list_txt">
             <h1>{filtered.title}</h1>
             <h2>{filtered.description}</h2>
-            <h3>{filtered.price}</h3>
+            <h3>€ {filtered.price}</h3>
           </section>
           <div className="cartbutton">
             <form onSubmit={addToCart}>

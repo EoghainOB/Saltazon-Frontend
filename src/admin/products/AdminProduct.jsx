@@ -33,19 +33,23 @@ function AdminProduct({ product }) {
   return (
     <>
       {product ? (
-        <>
-          <h1>{product.title}</h1>
-          <h2>{product.description}</h2>
-          <img src={product.imageUrl} alt={"picture of product"} />
-          <h2>Quantity: {product.quantity}</h2>
-          <input
-            type="number"
-            value={newQuantity}
-            onChange={(e) => setNewQuantity(e.target.value)}
-          />
-          <button onClick={() => updateQuantity()}>Add stock</button>
-          <button onClick={() => deleteItem(product.id)}>Delete Item</button>
-        </>
+        <div className="storesProductlist">
+          <div className="storesProductlistImage">
+            <img src={product.imageUrl} alt={"picture of product"} />
+          </div>
+          <div className="storesProductDetails">
+            <h1>{product.title}</h1>
+            <h2>{product.description}</h2>
+            <h2>Quantity: {product.quantity}</h2>
+            <input
+              type="number"
+              value={newQuantity}
+              onChange={(e) => setNewQuantity(e.target.value)}
+            />
+            <button onClick={() => updateQuantity()}>Add stock</button>
+            <button onClick={() => deleteItem(product.id)}>Delete Item</button>
+          </div>
+        </div>
       ) : (
         <p>Product has been deleted.</p>
       )}
