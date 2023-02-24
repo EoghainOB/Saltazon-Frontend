@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../../context/authProvider";
 import jwt_decode from "jwt-decode";
 import axios from "../../api/axios";
@@ -38,6 +38,7 @@ const LoginForm = () => {
       );
       const accessToken = await response?.data?.accessToken;
       const decoded = jwt_decode(accessToken);
+      console.log("DECODED", decoded);
       setAuth(decoded);
       setUser("");
       setPwd("");

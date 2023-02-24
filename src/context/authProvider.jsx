@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getStores();
-  }, [stores]);
+  }, [stores, trigger]);
 
   const getTags = async () => {
     let tags = await products?.map((product) => product.category);

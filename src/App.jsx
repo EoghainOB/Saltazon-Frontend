@@ -27,7 +27,6 @@ const App = () => {
           <Route exact path="/" element={<ProductList />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/product/:id" element={<ProductPage />} />
-          <Route exact path="/create-new-store" element={<NewStore />} />
         </Route>
         <Route
           element={<RequireAuth allowedRoles={["admin", "super-admin"]} />}

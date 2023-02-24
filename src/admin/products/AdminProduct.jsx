@@ -1,7 +1,9 @@
 import axios from "../../api/axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../../context/authProvider";
 
 function AdminProduct({ product }) {
+  const { setTrigger } = useContext(AuthContext);
   const [newQuantity, setNewQuantity] = useState(0);
   const [products, setProducts] = useState(product);
 
@@ -16,6 +18,7 @@ function AdminProduct({ product }) {
       .catch((error) => {
         console.error(error);
       });
+    setTrigger(products);
   };
 
   const deleteItem = (id) => {
@@ -28,6 +31,7 @@ function AdminProduct({ product }) {
       .catch((error) => {
         console.error(error);
       });
+    setTrigger("x");
   };
 
   return (

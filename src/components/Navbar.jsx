@@ -36,13 +36,13 @@ function NavBar() {
             </Link>
           </li>
         )}
-        {auth.role === "user" && (
+        {/* {auth.role === "user" && (
           <li>
             <Link to="/create-new-store" className="nav_button">
               Create new store
             </Link>
           </li>
-        )}
+        )} */}
         {auth.role === "admin" && (
           <li>
             <Link to="/admin" className="nav_button">

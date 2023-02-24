@@ -91,12 +91,22 @@ label {
   max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   justify-content: right;
   margin: auto;
-  height: 30px;
+  height: 35px;
   color: white;
   text-align: right;
-  padding: 5px;
+  padding: 0px;
+}
+
+.login_info button {
+  padding: 4px;
+  background-color: rgb(98, 98, 98);
+  color: white;
+  margin-top: 5px;
+  margin-left: 10px;
+  border-radius: 3px;
 }
 
 .login_info h4 {
@@ -266,7 +276,7 @@ a {
 
 .top_header {
   text-align: center;
-  height: 100px;
+  height: 110px;
   background-color: #e5e5f7;
   background-image: repeating-radial-gradient(
       circle at 0 0,
