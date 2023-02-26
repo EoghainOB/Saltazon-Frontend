@@ -1,43 +1,39 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "../api/axios";
 
-const AuthContext = createContext({});
+export const AuthContext = createContext({});
+
+export const getProducts = async (filter, searchTerm) => {
+  let url = "http://localhost:8080/api/product";
+  if (filter !== "all") {
+    url += `?category=${filter}`;
+  }
+  if (searchTerm) {
+    url += `&q=${searchTerm}`;
+  }
+  const response = await axios.get(url);
+  return response.data.data;
+};
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-
   const [trigger, setTrigger] = useState("");
   const [cart, setCart] = useState();
   const [stores, setStores] = useState("");
   const [products, setProducts] = useState();
   const [tags, setTags] = useState();
-
-  const getProducts = async () => {
-    const data = await axios.get("http://localhost:8080/api/product");
-    setProducts(data.data.data);
-  };
+  const [filter, setFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    getProducts();
-  }, [auth, trigger]);
-
-  const getStores = async () => {
-    const data = await axios.get("http://localhost:8080/api/store");
-    setStores(data.data.data);
-  };
+    getProducts(filter, searchTerm).then(setProducts);
+  }, [auth, trigger, filter]);
 
   useEffect(() => {
-    getStores();
-  }, [stores, trigger]);
-
-  const getTags = async () => {
-    let tags = await products?.map((product) => product.category);
-    setTags(tags);
-  };
-
-  useEffect(() => {
-    getTags();
-  }, [auth, products]);
+    axios.get("http://localhost:8080/api/store").then((response) => {
+      setStores(response.data.data);
+    });
+  }, [trigger]);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -53,6 +49,13 @@ export const AuthProvider = ({ children }) => {
     }
   }, [auth.username, trigger]);
 
+  useEffect(() => {
+    if (products) {
+      const tags = products.map((product) => product.category);
+      setTags(tags);
+    }
+  }, [products]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -65,6 +68,10 @@ export const AuthProvider = ({ children }) => {
         setTrigger,
         stores,
         setStores,
+        filter,
+        setFilter,
+        setSearchTerm,
+        searchTerm,
       }}
     >
       {children}

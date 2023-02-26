@@ -3,7 +3,7 @@ import { useContext } from "react";
 import AuthContext from "../context/authProvider";
 
 function NavBar() {
-  const { auth, cart } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   return (
     <nav className="navbar">
@@ -36,13 +36,6 @@ function NavBar() {
             </Link>
           </li>
         )}
-        {/* {auth.role === "user" && (
-          <li>
-            <Link to="/create-new-store" className="nav_button">
-              Create new store
-            </Link>
-          </li>
-        )} */}
         {auth.role === "admin" && (
           <li>
             <Link to="/admin" className="nav_button">
