@@ -10,7 +10,6 @@ import Unauthorised from "./components/unauthorised";
 import SuperAdminPage from "./admin/SuperAdminPage.jsx";
 import Layout from "./components/layout";
 import ProductPage from "./components/products/ProductPage";
-import NewStore from "./components/login/newStore";
 
 const App = () => {
   return (

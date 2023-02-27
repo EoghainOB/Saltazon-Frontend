@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/authProvider";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const { setCart, auth, products } = useContext(AuthContext);
+  const { setCart, auth, setCartQty } = useContext(AuthContext);
+  const [total, setTotal] = useState(0);
 
   const cart = JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
 
@@ -15,7 +16,20 @@ function Cart() {
     const updatedCart = cart.filter((item) => item.id !== id);
     localStorage.setItem(`cart_${auth.username}`, JSON.stringify(updatedCart));
     setCart(updatedCart);
+    setTotal(0);
   };
+
+  useEffect(() => {
+    const subTotals = cart.map((item) => +item.price * +item.qty);
+    const totals = subTotals.reduce((acc, item) => acc + item);
+    setTotal(totals);
+  }, [cart]);
+
+  useEffect(() => {
+    const cartAmount = cart?.map((item) => item.id);
+    const allCartItems = cartAmount.length;
+    setCartQty(allCartItems);
+  }, [cart, setCartQty]);
 
   return (
     <div className="cart">
@@ -39,9 +53,17 @@ function Cart() {
       </div>
       {cart.map((item, index) => {
         return (
-          <CartItem item={item} index={index} removeFromCart={removeFromCart} />
+          <div key={index} className="cart_item">
+            <CartItem item={item} removeFromCart={removeFromCart} />
+          </div>
         );
       })}
+      <div className="totalAmount">
+        <h2>
+          <b>Total: € {total.toFixed(2)}</b>
+        </h2>
+        <button type="button">Checkout</button>
+      </div>
     </div>
   );
 }

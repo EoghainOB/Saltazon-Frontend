@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authProvider";
 
 function ProfileBar() {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth, setAuth, cartQty } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -16,6 +16,7 @@ function ProfileBar() {
   return (
     <div className="login_container">
       <div className="login_info">
+        {auth.username && <h4>Cart {cartQty}</h4>}
         {auth.username && <h4>Logged in as {auth?.username}</h4>}
         {auth.username && <button onClick={handleLogout}>Logout</button>}
       </div>

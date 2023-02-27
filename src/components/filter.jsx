@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../context/authProvider";
 import { getProducts } from "../context/authProvider";
 
 const Filter = () => {
-  const { products, setSearchTerm, searchTerm, setFilter, filter } =
+  const { products, setSearchTerm, searchTerm, setFilter, filter, setTrigger } =
     useContext(AuthContext);
+
+  const [search, setSearch] = useState("");
 
   const uniqueCategories = [
     ...new Set(products.map((product) => product.category)),
@@ -17,11 +19,13 @@ const Filter = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    setSearchTerm(search);
     getProducts(filter, searchTerm);
+    setTrigger();
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -32,7 +36,7 @@ const Filter = () => {
             type="text"
             className="search"
             placeholder="Search"
-            onChange={handleSearchChange}
+            onChange={handleSearch}
           />
           <button>Search</button>
         </form>

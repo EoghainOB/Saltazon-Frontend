@@ -491,7 +491,6 @@ footer {
   width: 100%;
   padding: 10px;
   margin: auto;
-  margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 15px;
 }
@@ -559,4 +558,24 @@ footer {
 
 .delButton button {
   margin: 0;
+}
+
+.totalAmount {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  background-color: rgb(243, 243, 243);
+  margin-top: 10px;
+  padding: 15px;
+  text-align: right;
+}
+
+.totalAmount button {
+  margin: 0px;
+  margin-left: 20px;
+}
+
+.productpage_info h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

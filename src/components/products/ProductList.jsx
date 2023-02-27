@@ -12,7 +12,7 @@ function ProductList() {
   const [itemsPerPage] = useState(12);
 
   const endOffset = itemOffset + itemsPerPage;
-  const pageCount = Math.ceil(products?.length / itemsPerPage);
+  const pageCount = Math.ceil(products.length / itemsPerPage);
 
   const handlePageClick = (e) => {
     const newOffset = (e.selected * itemsPerPage) % products.length;
@@ -24,7 +24,7 @@ function ProductList() {
       <div className="products">
         <Filter />
         <>
-          {products?.slice(itemOffset, endOffset).map((product, index) => {
+          {products.slice(itemOffset, endOffset).map((product, index) => {
             return (
               <div key={index}>
                 <Link to={`/product/${product.id}`}>
@@ -38,11 +38,15 @@ function ProductList() {
             <div className="paging">
               <ReactPaginate
                 breakLabel="..."
-                nextLabel="Next >"
+                nextLabel={
+                  Math.ceil(endOffset / itemsPerPage) === pageCount
+                    ? ""
+                    : "Next >"
+                }
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={2}
                 pageCount={Math.ceil(pageCount)}
-                previousLabel="< Previous"
+                previousLabel={itemOffset === 0 ? "" : "< Previous"}
               />
             </div>
           )}

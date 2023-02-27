@@ -3,7 +3,12 @@ import { useContext } from "react";
 import AuthContext from "../context/authProvider";
 
 function NavBar() {
-  const { auth } = useContext(AuthContext);
+  const { auth, setSearchTerm, setFilter } = useContext(AuthContext);
+
+  const clearFilter = (e) => {
+    setSearchTerm("");
+    setFilter("");
+  };
 
   return (
     <nav className="navbar">
@@ -24,7 +29,7 @@ function NavBar() {
         )}
         {auth.username && (
           <li>
-            <Link to="/" className="nav_button">
+            <Link to="/" className="nav_button" onClick={clearFilter}>
               All Products
             </Link>
           </li>

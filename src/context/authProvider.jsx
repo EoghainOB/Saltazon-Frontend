@@ -9,7 +9,7 @@ export const getProducts = async (filter, searchTerm) => {
     url += `?category=${filter}`;
   }
   if (searchTerm) {
-    url += `&q=${searchTerm}`;
+    url += `?q=${searchTerm}`;
   }
   const response = await axios.get(url);
   return response.data.data;
@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [tags, setTags] = useState();
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [cartQty, setCartQty] = useState(0);
 
   useEffect(() => {
     getProducts(filter, searchTerm).then(setProducts);
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     } else {
       setCart([]);
     }
-  }, [auth.username, trigger]);
+  }, [auth.username, trigger, cartQty]);
 
   useEffect(() => {
     if (products) {
@@ -72,6 +73,8 @@ export const AuthProvider = ({ children }) => {
         setFilter,
         setSearchTerm,
         searchTerm,
+        cartQty,
+        setCartQty,
       }}
     >
       {children}

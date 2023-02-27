@@ -1,6 +1,6 @@
-function CartItem({ item, index, removeFromCart }) {
+function CartItem({ item, removeFromCart }) {
   return (
-    <article key={index} className="cart_item">
+    <>
       <div className="cartImage">
         <img src={item.image} />
       </div>
@@ -27,7 +27,7 @@ function CartItem({ item, index, removeFromCart }) {
           Remove
         </button>
       </div>
-    </article>
+    </>
   );
 }
 

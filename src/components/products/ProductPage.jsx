@@ -45,6 +45,9 @@ const ProductPage = () => {
         <div className="productpage_info">
           <section className="productpage_list_txt">
             <h1>{filtered.title}</h1>
+            <h4>
+              Category: <b>{filtered.category}</b>
+            </h4>
             <h2>{filtered.description}</h2>
             <h3>€ {filtered.price}</h3>
           </section>
