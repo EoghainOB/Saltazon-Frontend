@@ -8,23 +8,16 @@ function Cart() {
 
   const cart = JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
 
-  if (cart.length === 0) {
-    return <div className="cartEmpty">No items in cart, why not add some?</div>;
-  }
-
   const removeFromCart = async (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     localStorage.setItem(`cart_${auth.username}`, JSON.stringify(updatedCart));
     setCart(updatedCart);
-    setTotal(0);
   };
 
   useEffect(() => {
-    if (cart) {
-      const subTotals = cart.map((item) => +item.price * +item.qty);
-      const totals = subTotals.reduce((acc, item) => acc + item);
-      setTotal(totals);
-    }
+    const subTotals = cart.map((item) => +item.price * +item.qty);
+    const totals = subTotals.reduce((acc, item) => acc + item);
+    setTotal(totals);
   }, [cart]);
 
   return (
