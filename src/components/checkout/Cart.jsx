@@ -3,7 +3,7 @@ import AuthContext from "../../context/authProvider";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const { setCart, auth, setCartQty } = useContext(AuthContext);
+  const { setCart, auth } = useContext(AuthContext);
   const [total, setTotal] = useState(0);
 
   const cart = JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
@@ -20,16 +20,12 @@ function Cart() {
   };
 
   useEffect(() => {
-    const subTotals = cart.map((item) => +item.price * +item.qty);
-    const totals = subTotals.reduce((acc, item) => acc + item);
-    setTotal(totals);
+    if (cart) {
+      const subTotals = cart.map((item) => +item.price * +item.qty);
+      const totals = subTotals.reduce((acc, item) => acc + item);
+      setTotal(totals);
+    }
   }, [cart]);
-
-  useEffect(() => {
-    const cartAmount = cart?.map((item) => item.id);
-    const allCartItems = cartAmount.length;
-    setCartQty(allCartItems);
-  }, [cart, setCartQty]);
 
   return (
     <div className="cart">

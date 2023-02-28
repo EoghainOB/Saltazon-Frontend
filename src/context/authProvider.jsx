@@ -31,24 +31,18 @@ export const AuthProvider = ({ children }) => {
   }, [auth, trigger, filter]);
 
   useEffect(() => {
+    const cart =
+      JSON.parse(localStorage.getItem(`cart_${auth.username}`)) || [];
+    const cartAmount = cart?.map((item) => item.id);
+    const allCartItems = cartAmount.length;
+    setCartQty(allCartItems);
+  }, [cart, products]);
+
+  useEffect(() => {
     axios.get("http://localhost:8080/api/store").then((response) => {
       setStores(response.data.data);
     });
   }, [trigger]);
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      if (auth.username === parsedCart[0].owner) {
-        setCart(parsedCart);
-      } else {
-        setCart([]);
-      }
-    } else {
-      setCart([]);
-    }
-  }, [auth.username, trigger, cartQty]);
 
   useEffect(() => {
     if (products) {

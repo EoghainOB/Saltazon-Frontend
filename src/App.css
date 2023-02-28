@@ -87,25 +87,43 @@ label {
   background-color: rgb(0, 0, 0);
 }
 
+.login_cart_container {
+  margin: auto;
+  max-width: 1200px;
+  height: 38px;
+  display: flex;
+  align-items: baseline;
+  justify-content: right;
+}
+
+.cart_info {
+  justify-content: right;
+  margin-right: 10px;
+}
+
+.cart_info h4 {
+  color: white;
+}
+
+.fa-cart-shopping {
+  color: white;
+  margin-right: 10px;
+}
+
 .form-filter {
   width: 20%;
 }
 
 .login_info {
-  max-width: 1200px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: right;
-  margin: auto;
-  height: 35px;
+  align-items: center;
   color: white;
   text-align: right;
   padding: 0px;
 }
 
 .login_info button {
-  padding: 4px;
+  padding: 5px;
   background-color: rgb(98, 98, 98);
   color: white;
   margin-top: 5px;
@@ -115,6 +133,11 @@ label {
 
 .login_info h4 {
   font-size: 0.9em;
+  padding: 4px;
+  background-color: rgb(169, 1, 166);
+  margin-top: 5px;
+  margin-left: 10px;
+  border-radius: 3px;
 }
 
 ul {
@@ -123,7 +146,6 @@ ul {
 
 li {
   display: inline;
-  /* margin-right: 10px; */
 }
 
 a {

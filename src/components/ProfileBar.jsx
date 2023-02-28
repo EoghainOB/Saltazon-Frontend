@@ -1,5 +1,7 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../context/authProvider";
 
 function ProfileBar() {
@@ -15,10 +17,21 @@ function ProfileBar() {
 
   return (
     <div className="login_container">
-      <div className="login_info">
-        {auth.username && <h4>Cart {cartQty}</h4>}
-        {auth.username && <h4>Logged in as {auth?.username}</h4>}
-        {auth.username && <button onClick={handleLogout}>Logout</button>}
+      <div className="login_cart_container">
+        <div className="cart_info">
+          {auth.username && cartQty > 0 && (
+            <Link to="/cart">
+              <h4>
+                <FontAwesomeIcon icon={faCartShopping} />
+                {cartQty} {cartQty === 1 ? "item" : "items"}
+              </h4>
+            </Link>
+          )}
+        </div>
+        <div className="login_info">
+          {auth.username && <h4>{auth?.username}</h4>}
+          {auth.username && <button onClick={handleLogout}>Logout</button>}
+        </div>
       </div>
     </div>
   );
