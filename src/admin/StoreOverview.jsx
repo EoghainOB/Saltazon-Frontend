@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 export default function StoreOverview({ storeInfo, index }) {
   const storeId = storeInfo.uniqueStoreId;
 
+  const deleteStore = (e) => {};
+
   return (
     <>
-      <h3>Store name: {storeInfo.name}</h3>
-      <p>Store ID#: {storeId}</p>
-      <Link to={"/admin"}>Go to {storeInfo.name} Admin</Link>
-      <br />
-      <button>Delete Store</button>
+      <h1>{storeInfo.name}</h1>
+      <p>
+        Store ID#: <b>{storeId}</b>
+      </p>
+      <Link to={"/admin"}>
+        <h4>Go to store Admin</h4>
+      </Link>
+      <button onClick={deleteStore}>Delete Store</button>
     </>
   );
 }

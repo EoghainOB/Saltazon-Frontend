@@ -44,7 +44,9 @@ function AdminProduct({ product }) {
           <div className="storesProductDetails">
             <h1>{product.title}</h1>
             <h2>{product.description}</h2>
-            <h2>Quantity: {product.quantity}</h2>
+            <h2>
+              <b>Quantity:</b> {product.quantity}
+            </h2>
             <input
               type="number"
               value={newQuantity}

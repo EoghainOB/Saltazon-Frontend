@@ -1,40 +1,39 @@
 import { useContext } from "react";
 import AuthContext from "../context/authProvider";
 import axios from "../api/axios";
-import { useNavigate } from "react-router-dom";
 
 function AddStoreForm({}) {
-  const { auth, setTrigger, stores } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  let lastEntry = stores[stores.length - 1];
-  const id = +lastEntry.uniqueStoreId + 1;
+  const { setTrigger, stores } = useContext(AuthContext);
 
   const addNewStore = async (e) => {
     e.preventDefault();
-    const data = {
-      name: e.target[0].value,
-      uniqueStoreId: id,
-    };
-    console.log(data);
-    await axios
-      .post("http://localhost:8080/api/store/", data, {
+    const name = e.target[0].value;
+    const email = e.target[1].value;
+
+    const userData = await axios.get(
+      `http://localhost:8080/api/user/email/${email}`
+    );
+
+    const userId = userData.data.data.id;
+    const id = Date.now();
+    const data = { id, name };
+    const response = await axios.post(
+      "http://localhost:8080/api/store/",
+      data,
+      {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+      }
+    );
+    await axios.patch(`http://localhost:8080/api/user/${userId}`, {
+      storeId: id,
+      role: "admin",
+    });
     setTrigger("yes");
-    navigate("/admin");
   };
 
-  console.log();
   return (
     <>
-      <h4>
-        <b>Add new Store</b>
-      </h4>
       <form onSubmit={addNewStore} className="add_store_form">
         <label htmlFor="name_input">Store name:</label>
         <input placeholder="Name of store" id="name_input" />

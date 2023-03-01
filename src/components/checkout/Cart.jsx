@@ -14,6 +14,15 @@ function Cart() {
     setCart(updatedCart);
   };
 
+  const updateQty = (e, id) => {
+    const newQty = e.target.value;
+    const itemIndex = cart.findIndex((item) => item.id === id);
+    const updatedCart = [...cart];
+    updatedCart[itemIndex].qty = newQty;
+    localStorage.setItem(`cart_${auth.username}`, JSON.stringify(updatedCart));
+    setCart(updatedCart);
+  };
+
   useEffect(() => {
     const subTotals = cart.map((item) => +item.price * +item.qty);
     const totals = subTotals.reduce((acc, item) => acc + item);
@@ -43,7 +52,11 @@ function Cart() {
       {cart.map((item, index) => {
         return (
           <div key={index} className="cart_item">
-            <CartItem item={item} removeFromCart={removeFromCart} />
+            <CartItem
+              item={item}
+              removeFromCart={removeFromCart}
+              updateQty={updateQty}
+            />
           </div>
         );
       })}

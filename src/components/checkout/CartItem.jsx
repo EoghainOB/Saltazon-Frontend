@@ -1,4 +1,4 @@
-function CartItem({ item, removeFromCart }) {
+function CartItem({ item, removeFromCart, updateQty }) {
   return (
     <>
       <div className="cartImage">
@@ -8,7 +8,18 @@ function CartItem({ item, removeFromCart }) {
         <h2>{item.name}</h2>
       </div>
       <div className="cartQty">
-        <h2>{item.qty}</h2>
+        <select
+          name="quantity"
+          id={`quantity_${item.id}`}
+          value={item.qty}
+          onChange={(e) => updateQty(e, item.id)}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
       <div className="cartPrice">
         <h2>€ {item.price}</h2>
