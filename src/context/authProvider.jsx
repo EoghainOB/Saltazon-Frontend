@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "../api/axios";
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext({});
 
@@ -30,6 +31,22 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     getProducts(filter, searchTerm).then(setProducts);
   }, [auth, trigger, filter]);
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  };
+
+  useEffect(() => {
+    const accessToken = getCookie("accessToken");
+    if (accessToken) {
+      const decoded = jwt_decode(accessToken);
+      setAuth(decoded);
+    } else {
+      setAuth("");
+    }
+  }, []);
 
   useEffect(() => {
     const cart =

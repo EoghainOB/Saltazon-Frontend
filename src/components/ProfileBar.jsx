@@ -5,13 +5,16 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../context/authProvider";
 
 function ProfileBar() {
-  const { auth, setAuth, cartQty } = useContext(AuthContext);
+  const { auth, setAuth, cartQty, setTrigger } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await fetch("http://localhost:8080/user/logout", { method: "POST" });
     setAuth("");
+    setTrigger(false);
+    document.cookie = "accessToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "refreshToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
     navigate("/");
   };
 

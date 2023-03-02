@@ -7,9 +7,9 @@ import axios from "../../api/axios";
 const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/products";
 
-  const { setAuth, auth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -38,10 +38,12 @@ const LoginForm = () => {
       );
       const accessToken = await response?.data?.accessToken;
       const decoded = jwt_decode(accessToken);
-      console.log("DECODED", decoded);
       setAuth(decoded);
       setUser("");
       setPwd("");
+
+      document.cookie = `accessToken=${accessToken}; path=/;`;
+
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
@@ -56,30 +58,6 @@ const LoginForm = () => {
       errRef.current.focus();
     }
   };
-
-  useEffect(() => {
-    const refreshAccessToken = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:8080/user/refresh",
-          null,
-          { withCredentials: true }
-        );
-        const accessToken = await response?.data?.accessToken;
-        const decoded = jwt_decode(accessToken);
-        setAuth(decoded);
-      } catch (err) {
-        console.error(error);
-      }
-    };
-
-    if (auth) {
-      const now = Date.now() / 1000;
-      if (auth.exp < now + 60) {
-        refreshAccessToken();
-      }
-    }
-  }, [auth]);
 
   return (
     <div className="formContainer">
