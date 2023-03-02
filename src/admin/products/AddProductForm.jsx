@@ -1,11 +1,9 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../context/authProvider";
 import axios from "../../api/axios";
-import { useNavigate } from "react-router-dom";
 
 function AddProductForm({ storeId }) {
-  const { setTrigger } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { setTrigger, products, setProducts } = useContext(AuthContext);
 
   const initialState = {
     title: "",
@@ -38,9 +36,9 @@ function AddProductForm({ storeId }) {
       .then((response) => {
         console.log(response);
         resetForm();
+        setProducts([...products, response.data]);
       });
-    setTrigger("yes");
-    navigate("/admin");
+    setTrigger("x");
   };
 
   const resetForm = () => {

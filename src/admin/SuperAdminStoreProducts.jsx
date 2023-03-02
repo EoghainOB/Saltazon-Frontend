@@ -1,26 +1,24 @@
 import { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import AuthContext from "../context/authProvider";
 import AdminProductList from "./products/AdminProductList";
 
-function AdminPage() {
-  const { auth, stores, products, trigger } = useContext(AuthContext);
+function SuperAdminStoreProducts() {
+  const { auth, stores, products, trigger, adminStore } =
+    useContext(AuthContext);
   const [storeProducts, setStoreProducts] = useState([]);
 
-  const adminStoreId = auth.storeId;
+  const storeId = adminStore;
 
   const currentStore = stores.filter(
-    (store) => store.uniqueStoreId === adminStoreId
+    (store) => store.uniqueStoreId === storeId
   );
 
   useEffect(() => {
     let storeItems = [];
-    if (auth.role === "super-admin") {
-      storeItems = products;
-    } else {
-      storeItems = products.filter((items) => items.storeId === adminStoreId);
-    }
+    storeItems = products.filter((items) => items.storeId === storeId);
     setStoreProducts(storeItems);
-  }, [auth.role, products, adminStoreId, trigger]);
+  }, [auth.role, products, storeId, trigger]);
 
   return (
     <>
@@ -30,10 +28,10 @@ function AdminPage() {
       <AdminProductList
         products={storeProducts}
         storeName={currentStore[0].name}
-        storeId={adminStoreId}
+        storeId={storeId}
       />
     </>
   );
 }
 
-export default AdminPage;
+export default SuperAdminStoreProducts;

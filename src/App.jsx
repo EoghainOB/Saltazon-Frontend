@@ -10,6 +10,7 @@ import SuperAdminPage from "./admin/SuperAdminPage.jsx";
 import Layout from "./components/layout";
 import ProductPage from "./components/products/ProductPage";
 import CartContainer from "./components/checkout/CartContainer";
+import SuperAdminStoreProducts from "./admin/SuperAdminStoreProducts";
 
 const App = () => {
   return (
@@ -34,6 +35,11 @@ const App = () => {
         </Route>
         <Route element={<RequireAuth allowedRoles={["super-admin"]} />}>
           <Route exact path="/admin/super" element={<SuperAdminPage />} />
+          <Route
+            exact
+            path="/admin/superproducts"
+            element={<SuperAdminStoreProducts />}
+          />
         </Route>
       </Route>
     </Routes>

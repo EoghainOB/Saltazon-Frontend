@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import AdminProduct from "./AdminProduct.jsx";
 import AddProductForm from "./AddProductForm.jsx";
 
-function AdminProductList({ products, storeName, storeId }) {
+function AdminProductList({ products, storeId }) {
   const [isShown, setIsShown] = useState(false);
 
   const handleClick = () => {

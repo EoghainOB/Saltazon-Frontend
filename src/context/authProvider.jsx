@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [tags, setTags] = useState();
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [adminStore, setAdminStore] = useState("");
   const [cartQty, setCartQty] = useState(0);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export const AuthProvider = ({ children }) => {
         setAuth,
         tags,
         products,
+        setProducts,
         cart,
         setCart,
         setTrigger,
@@ -69,6 +71,8 @@ export const AuthProvider = ({ children }) => {
         searchTerm,
         cartQty,
         setCartQty,
+        setAdminStore,
+        adminStore,
       }}
     >
       {children}
