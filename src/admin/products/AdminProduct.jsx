@@ -25,13 +25,12 @@ function AdminProduct({ product }) {
     axios
       .delete(`http://localhost:8080/api/product/${id}`)
       .then((response) => {
-        console.log(response.data);
         setProducts(null);
       })
       .catch((error) => {
         console.error(error);
       });
-    setTrigger("x");
+    setTrigger(products);
   };
 
   return (

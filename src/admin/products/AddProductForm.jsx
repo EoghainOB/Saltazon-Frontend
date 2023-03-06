@@ -19,7 +19,6 @@ function AddProductForm({ storeId }) {
   const addProduct = async (e) => {
     e.preventDefault();
     const data = {
-      id: Date.now(),
       storeId: storeId,
       category: formState.category,
       title: formState.title,
@@ -34,7 +33,6 @@ function AddProductForm({ storeId }) {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         resetForm();
         setProducts([...products, response.data]);
       });

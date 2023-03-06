@@ -49,7 +49,6 @@ const NewUserForm = () => {
   const addNewUser = async (e) => {
     e.preventDefault();
     const data = {
-      id: Date.now(),
       email: user,
       password: pwd,
       role: "user",

@@ -10,7 +10,6 @@ function ProfileBar() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch("http://localhost:8080/user/logout", { method: "POST" });
     setAuth("");
     setTrigger(false);
     document.cookie = "accessToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
